@@ -5,7 +5,7 @@
             "label": "Live Server: Open",
             "type": "shell",
             "isBackground": true,
-            "command": "npx live-server --port=5500 --no-browser .",
+            "command": " npx live-server --port=5500 --browser=chrome .",
             "presentation": {
                 "echo": true,
                 "reveal": "always",
