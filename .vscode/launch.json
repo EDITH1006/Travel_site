@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch TRAV Project",
+            "url": "http://localhost:5500",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "/*": "${webRoot}/*"
+            },
+            "preLaunchTask": "Live Server: Open"
+        }
+    ]
+}

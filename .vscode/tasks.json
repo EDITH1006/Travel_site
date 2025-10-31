@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Live Server: Open",
+            "type": "shell",
+            "isBackground": true,
+            "command": "npx live-server --port=5500 --no-browser .",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Serving",
+                    "endsPattern": "^$"
+                }
+            }
+        }
+    ]
+}
