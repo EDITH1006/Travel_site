@@ -1,0 +1,118 @@
+:root {
+  --accent: rgb(37, 99, 235);
+  --text: rgb(17, 24, 39);
+  --muted: rgb(107, 114, 128);
+  --bg: rgb(255, 255, 255);
+}
+body {
+  font-family: Inter, system-ui, sans-serif;
+   background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop") no-repeat center/cover; 
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  overflow-x: hidden;
+}
+.nav {
+  width: 100%;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  padding: 20px 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around; 
+  z-index: 1;
+}
+
+.logo {
+  width: 120px; 
+  margin-left: 50px;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  display: flex; 
+  justify-content:flex-end;
+  align-items: center;
+
+}
+
+nav ul li {
+  list-style: none;
+  margin-left: 40px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 17px;
+  transition: 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: rgb(2, 2, 104);
+}
+.booking-section {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  margin:150px auto 40px;
+}
+.booking-section h1 {
+  margin-bottom: 10px;
+  font-size: 28px;
+  color: var(--accent);
+}
+.booking-section p {
+  color: var(--muted);
+  margin-bottom: 25px;
+}
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: var(--text);
+}
+input, select {
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 14px;
+}
+input:focus, select:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+.btn {
+  background: var(--accent);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.btn:hover {
+  background: rgb(29, 78, 216);
+}

@@ -146,12 +146,12 @@ body {
 }
 
 .btn-primary {
-  background: hsl(74.77deg 57% 51%);
+  background: rgb(21, 140, 176);
   color: black;
 }
 
 .btn-primary:is(:hover, :focus) {
-  background: hsl(75, 48%, 49%);
+  background: rgb(93, 179, 205);
 }
 
 .btn-secondary {
@@ -256,7 +256,7 @@ body {
 }
 
 .helpline-box .icon-box {
-  background: hsl(74.77deg 57% 51%);
+  background: hsl(177, 57%, 51%);
   padding: 6px;
   border-radius: 50%;
   color: var(--white);
@@ -457,7 +457,7 @@ body {
 \*-----------------------------------*/
 
 .tour-search {
-  background: hsl(74.77deg 57% 51%);
+  background: hsl(187, 57%, 51%);
 
   padding-block: var(--section-padding);
 }
@@ -542,7 +542,7 @@ body {
 
 
 .popular-card .card-rating {
-  background: hsl(74.77deg 57% 51%);
+  background: hsl(182, 57%, 51%);
 
   color: var(--white);
   position: absolute;
@@ -758,7 +758,7 @@ body {
 \*-----------------------------------*/
 
 .cta {
-  background: hsl(74.77deg 57% 51%);
+  background: hsl(192, 57%, 51%);
 
   padding-block: var(--section-padding);
 }
@@ -820,7 +820,7 @@ body {
   left: 0;
   width: 50px;
   height: 2px;
-  background: hsl(74.77deg 57% 51%);
+  background: hsl(179, 57%, 51%);
 
 }
 
@@ -1368,7 +1368,7 @@ address {
 
   .navbar-link:hover {
     color: black;
-    background: hsl(74.77deg 57% 51%);
+    background: hsl(176, 57%, 51%);
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
 

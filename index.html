@@ -147,7 +147,7 @@
 
       </nav>
 
-      <button class="btn btn-primary">Book Now</button>
+      <button class="btn btn-primary" ><a href="book.html"> Book Now </a></button>
 
     </div>
   </div>
@@ -199,30 +199,9 @@
       <div class="container">
 
 
-
-          <div class="input-wrapper">
-            <label for="destination" class="input-label">Search Destination*</label>
-
-
-          </div>
-
-          <div class="input-wrapper">
-            <label for="people" class="input-label">Pax Number*</label>
-
-
-          </div>
-
-          <div class="input-wrapper">
-            <label for="checkin" class="input-label">Checkin Date**</label>
-
-
-          </div>
-
-          <div class="input-wrapper">
-            <label for="checkout" class="input-label">Checkout Date*</label>
-
-
-          </div>
+          <form action="/search" method="get">
+            <input type="search" id="search-query" name="q" placeholder="Search...">
+          </form>
 
           <button type="submit" class="btn btn-secondary">Inquire now</button>
 
