@@ -1,4 +1,4 @@
-:root {
+ :root {
 
   /**
    * colors
@@ -417,7 +417,7 @@ body {
 \*-----------------------------------*/
 
 .hero {
-  background-image: url("https://images.unsplash.com/photo-1516406742981-2b7d67ec4ae8?w=500&amp;auto=format&amp;fit=crop&amp;q=60&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbmFsaXxlbnwwfHwwfHx8MA%3D%3D");
+  background-image: url("https://images.unsplash.com/photo-1618232397405-90bb514c6658?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
