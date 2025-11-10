@@ -1,0 +1,225 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="All travel packages - RoamiGo" />
+  <meta name="author" content="Developergtm" />
+  <title>All Packages | ROAMIGO</title>
+
+  <!-- Use your existing style.css (make sure the namespaced patch from earlier is appended) -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* small page-local header styling */
+    header.simple {
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 14px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    header.simple .logo { color: var(--united-nations-blue); font-weight:700; text-decoration:none; }
+    header.simple .btn { text-decoration:none; color:#fff; background:var(--united-nations-blue); border-radius:8px; padding:8px 12px; }
+    main { padding:40px 20px; max-width:1100px; margin:0 auto; }
+    h1 { text-align:center; font-size:32px; margin-bottom:6px; color:var(--onyx); }
+    p.subtitle { text-align:center; color:var(--black-coral); margin-bottom:20px; }
+  </style>
+</head>
+<body>
+
+  <header class="simple">
+    <a href="index.html" class="logo">ROAMIGO</a>
+    <a href="book.html" class="btn">Book Now</a>
+  </header>
+
+  <main>
+    <section id="all-packages" class="all-packages">
+      <div class="container">
+        <p class="section-subtitle">Explore More</p>
+        <h2>All Travel Packages</h2>
+
+        <div class="controls" role="region" aria-label="package controls">
+          <div class="search">
+            <input type="text" id="searchInput" placeholder="Search packages..." aria-label="Search packages" />
+          </div>
+
+          <select id="sortSelect" aria-label="Sort packages">
+            <option value="popular">Sort by: Popular</option>
+            <option value="priceAsc">Price: Low → High</option>
+            <option value="priceDesc">Price: High → Low</option>
+            <option value="duration">Duration</option>
+          </select>
+
+          <div class="chips" role="group" aria-label="Filter by tag">
+            <button class="chip" data-filter="beach" type="button">Beach</button>
+            <button class="chip" data-filter="mountain" type="button">Mountain</button>
+            <button class="chip" data-filter="adventure" type="button">Adventure</button>
+            <button class="chip" data-filter="family" type="button">Family</button>
+            <button class="chip" data-filter="culture" type="button">Culture</button>
+            <button class="chip" data-filter="luxury" type="button">Luxury</button>
+            <button class="chip" data-filter="relax" type="button">Relax</button>
+          </div>
+        </div>
+
+        <div id="packageGrid" class="grid" aria-live="polite"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align:center;padding:20px 0;color:var(--black-coral);">
+    &copy; 2025 ROAMIGO — Developed by Developergtm.
+  </footer>
+
+  <script>
+    // ======== 50 sample packages ========
+    const packages = [
+      {id:1,title:"Goa Beach Escape",price:10999,type:"beach",duration:4,desc:"Sun, sand and nightlife in Goa with hotel & transfers.",image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=60"},
+      {id:2,title:"Himachal Mountain Retreat",price:15999,type:"mountain",duration:6,desc:"Guided treks, bonfire nights and scenic views.",image:"https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=60"},
+      {id:3,title:"Rajasthan Heritage Tour",price:19999,type:"culture",duration:7,desc:"Palaces, forts and cultural experiences across Rajasthan.",image:"https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?w=1200&q=60"},
+      {id:4,title:"Andaman Diving Special",price:27999,type:"adventure",duration:5,desc:"Diving, snorkeling and island hopping with instructors.",image:"https://images.unsplash.com/photo-1493558103817-58b2924bce98?w=1200&q=60"},
+      {id:5,title:"Kerala Backwaters Getaway",price:12999,type:"relax",duration:3,desc:"Houseboat stay with local meals and Ayurvedic options.",image:" https://static.india.com/wp-content/uploads/2024/01/2-10.jpg?impolicy=Medium_Widthonly&w=700"},
+      {id:6,title:"Leh-Ladakh Adventure",price:35999,type:"adventure",duration:8,desc:"High-altitude passes, river rafting and cultural visits.",image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=60"},
+      {id:7,title:"Goa Luxury Resort",price:45999,type:"luxury",duration:5,desc:"Stay at a 5-star Goa resort with spa and private beach.",image:" https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/f5/1d/31/aguada-cottage-garden.jpg?w=1400&h=800&s=1"},
+      {id:8,title:"Sikkim Hill Circuit",price:17999,type:"mountain",duration:6,desc:"Explore Gangtok, Lachung and Gurudongmar lake.",image:"https://images.unsplash.com/photo-1501785888041-af3ef285b470?crop=entropy&w=1200&q=60"},
+      {id:9,title:"Andhra Temple Tour",price:13999,type:"culture",duration:5,desc:"Visit historic temples and cultural landmarks.",image:"https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=60"},
+      {id:10,title:"Maldives Overwater Villa",price:89999,type:"luxury",duration:4,desc:"Private overwater villa with snorkeling and meals.",image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&w=1200&q=60"},
+      {id:11,title:"Sri Lanka Coastal Trip",price:21999,type:"beach",duration:7,desc:"Surfing, tea estates and wildlife parks.",image:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1200&q=60"},
+      {id:12,title:"Nepal Trekking Classic",price:25999,type:"adventure",duration:10,desc:"Annapurna base trek with local guide and camps.",image:"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=60"},
+      {id:13,title:"Ooty Tea Gardens",price:9999,type:"relax",duration:3,desc:"Cool hill station, tea gardens and toy train rides.",image:"https://media1.thrillophilia.com/filestore/1yu3i86mpopq2kp6irfc4hpuvmdg_coonoor-tea-estate-entry-fee-timings-holidays-reviews-header.jpg?w=1440&dpr=2 "},
+      {id:14,title:"Kashmir Houseboat Stay",price:24999,type:"relax",duration:5,desc:"Dal lake shikara rides and Srinagar sightseeing.",image:"https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=60"},
+      {id:15,title:"Pondicherry French Walk",price:11999,type:"culture",duration:4,desc:"Colonial lanes, cafes and serene beaches.",image:"https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=1200&q=60"},
+      {id:16,title:"Andhra Beach Camping",price:7999,type:"adventure",duration:2,desc:"Beach camping with bonfire and water sports.",image:"https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=1200&q=60"},
+      {id:17,title:"Sundarbans Wildlife Safari",price:18999,type:"adventure",duration:3,desc:"Mangrove boat safari and Bengal tiger spotting.",image:"https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200&q=60"},
+      {id:18,title:"Spiti Valley Explorer",price:32999,type:"adventure",duration:7,desc:"Remote high-altitude landscapes and monasteries.",image:"https://images.unsplash.com/photo-1501785888041-af3ef285b470?crop=entropy&w=1200&q=60"},
+      {id:19,title:"Munnar Tea & Hills",price:13999,type:"relax",duration:4,desc:"Tea plantations, waterfalls and relaxing stays.",image:"https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=1200&q=60"},
+      {id:20,title:"Pondicherry & Auroville",price:12999,type:"culture",duration:4,desc:"Spiritual retreat and French quarter exploration.",image:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=60"},
+      {id:21,title:"Mauritius Beach Holiday",price:45999,type:"beach",duration:6,desc:"Pristine beaches, snorkeling and island tours.",image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&w=1200&q=60"},
+      {id:22,title:"Bengaluru Weekend Escape",price:6999,type:"relax",duration:2,desc:"City stay, gardens and local cuisine tasting.",image:"https://images.unsplash.com/photo-1473654729523-203e25dfda10?w=1200&q=60"},
+      {id:23,title:"Goa Budget Backpack",price:7999,type:"beach",duration:5,desc:"Hostel stays, beaches and nightlife options.",image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=60"},
+      {id:24,title:"Dharamshala Meditation Retreat",price:14999,type:"culture",duration:5,desc:"Spiritual centers, Himalayan views and peace.",image:"https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=60"},
+      {id:25,title:"Goa Adventure Sports",price:13999,type:"adventure",duration:4,desc:"Parasailing, jet-ski and coasteering activities.",image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=60"},
+      {id:26,title:"Rann of Kutch Festival",price:14999,type:"culture",duration:3,desc:"Desert festival, handicrafts and folk music.",image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=60"},
+      {id:27,title:"Sundarban Luxury Lodge",price:26999,type:"luxury",duration:4,desc:"Comfortable lodge, guided safaris and gourmet meals.",image:"https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200&q=60"},
+      {id:28,title:"Kodaikanal Couples Retreat",price:12999,type:"relax",duration:3,desc:"Romantic hill stay, boating and local walks.",image:"https://media1.thrillophilia.com/filestore/lygpm4wk4t3j5p2czgjb6x18rm3d_shutterstock_2361028113.jpg?w=1440&dpr=2"},
+      {id:29,title:"Sikkim & Darjeeling Tea Trail",price:21999,type:"culture",duration:6,desc:"Tea estates and mountain rail experiences.",image:"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=60"},
+      {id:30,title:"Shimla Heritage & Trails",price:15999,type:"mountain",duration:4,desc:"Colonial Shimla, trails and scenic viewpoints.",image:"https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=60"},
+      {id:31,title:"Zanskar River Rafting",price:27999,type:"adventure",duration:6,desc:"White water rafting and remote valley camps.",image:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1200&q=60"},
+      {id:32,title:"Goa Romantic Package",price:18999,type:"family",duration:4,desc:"Couples package with candlelight dinner and beach stay.",image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=60"},
+      {id:33,title:"Sundarbans Budget Safari",price:9999,type:"adventure",duration:2,desc:"Budget boat trips and wildlife spotting.",image:"https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200&q=60"},
+      {id:34,title:"Agra & Jaipur Golden Triangle",price:17999,type:"culture",duration:5,desc:"Iconic monuments and royal palaces of North India.",image:"https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?w=1200&q=60"},
+      {id:35,title:"Andaman Luxury Cruise",price:69999,type:"luxury",duration:6,desc:"Luxury cruise with private cabins, meals and diving.",image:"https://images.unsplash.com/photo-1493558103817-58b2924bce98?w=1200&q=60"},
+      {id:36,title:"Varkala Cliffside Relax",price:11999,type:"relax",duration:3,desc:"Cliff beaches, yoga and Ayurvedic treatments.",image:"https://media1.thrillophilia.com/filestore/cwc7s0khz6c1b71z9mi15gssjajo_7949415686_19214a95de_b.jpg?w=1440&dpr=2 "},
+      {id:37,title:"Rishikesh Adventure Week",price:13999,type:"adventure",duration:5,desc:"River rafting, bungee and camping by the Ganges.",image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=60"},
+      {id:38,title:"Gokarna Beach Escape",price:8999,type:"beach",duration:4,desc:"Quiet beaches, cliffside cafes and relaxed vibe.",image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=60"},
+      {id:39,title:"Mumbai Food & City Walk",price:5999,type:"culture",duration:2,desc:"Street food trails and iconic city landmarks.",image:"https://images.unsplash.com/photo-1473654729523-203e25dfda10?w=1200&q=60"},
+      {id:40,title:"Coorg Coffee & Wildlife",price:13999,type:"relax",duration:4,desc:"Coffee plantation tours and wildlife sanctuaries.",image:"https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=1200&q=60"},
+      {id:41,title:"Shillong & Cherrapunji Waterfalls",price:16999,type:"adventure",duration:5,desc:"Lush landscapes and dramatic waterfalls.",image:" https://www.imitytravels.com/wp-content/uploads/2025/02/WhatsApp-Image-2025-05-19-at-6.21.20-PM.jpeg"},
+      {id:42,title:"Pondicherry Yoga Retreat",price:10999,type:"relax",duration:4,desc:"Yoga, meditation and coastal relaxation.",image:"https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=1200&q=60"},
+      {id:43,title:"Rajasthan Camel Safari",price:15999,type:"adventure",duration:3,desc:"Desert safaris, folk music and village stays.",image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=60"},
+      {id:44,title:"Seychelles Island Retreat",price:99999,type:"luxury",duration:6,desc:"Private island, premium stays and water sports.",image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=60"},
+      {id:45,title:"Bangkok & Pattaya Combo",price:24999,type:"culture",duration:6,desc:"City temples, markets and beach nightlife.",image:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1200&q=60"},
+      {id:46,title:"Oman Desert & Coast",price:44999,type:"culture",duration:7,desc:"Desert camps, wadis and coastal forts.",image:"https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200&q=60"},
+      {id:47,title:"Bali Wellness Retreat",price:38999,type:"relax",duration:6,desc:"Spa therapies, rice field walks and yoga.",image:"https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=1200&q=60"},
+      {id:48,title:"Japan Cherry Blossom Tour",price:79999,type:"culture",duration:8,desc:"Sakura season, temples and city tours.",image:"https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?w=1200&q=60"},
+      {id:49,title:"Iceland Northern Lights",price:119999,type:"adventure",duration:7,desc:"Glaciers, hot springs and aurora hunting.",image:"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=60"},
+      {id:50,title:"Vietnam Coastal Explorer",price:27999,type:"beach",duration:7,desc:"Halong Bay cruise, beaches and street food.",image:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1200&q=60"}
+    ];
+
+    const grid = document.getElementById("packageGrid");
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+    const chips = document.querySelectorAll("#all-packages .chip");
+
+    let filterType = null;
+    let page = 1;
+    const perPage = 12;
+
+    function formatPrice(n){ return '₹' + n.toLocaleString('en-IN'); }
+
+    function renderPackages(){
+      const q = (searchInput.value || '').toLowerCase();
+      let items = packages.filter(p => {
+        if(filterType && p.type !== filterType) return false;
+        if(q) return (p.title + ' ' + p.desc + ' ' + p.type).toLowerCase().includes(q);
+        return true;
+      });
+
+      // sort
+      if(sortSelect.value === 'priceAsc') items.sort((a,b)=>a.price-b.price);
+      else if(sortSelect.value === 'priceDesc') items.sort((a,b)=>b.price-a.price);
+      else if(sortSelect.value === 'duration') items.sort((a,b)=>a.duration-b.duration);
+      else items.sort((a,b)=>a.id - b.id); // default stable order
+
+      // pagination
+      const total = items.length;
+      const pages = Math.max(1, Math.ceil(total / perPage));
+      if(page > pages) page = 1;
+      const start = (page-1)*perPage;
+      const pageItems = items.slice(start, start+perPage);
+
+      if(pageItems.length === 0){
+        grid.innerHTML = '<div style="padding:30px;text-align:center;color:var(--black-coral)">No packages found.</div>';
+        return;
+      }
+
+      grid.innerHTML = pageItems.map(p => `
+        <article class="package-card-new" data-id="${p.id}">
+          <img src="${p.image}" alt="${p.title}" loading="lazy">
+          <div class="content">
+            <h3>${p.title}</h3>
+            <p>${p.desc}</p>
+            <p class="price">${formatPrice(p.price)} <span style="font-weight:400;color:var(--black-coral)">/ per person</span></p>
+            <div style="display:flex;gap:8px;margin-top:auto">
+              <a class="btn-view" href="book.html?pkg=${p.id}">Book Now</a>
+              <button class="btn" style="background:transparent;border:1px solid var(--united-nations-blue);color:var(--united-nations-blue)" onclick="viewDetails(${p.id})">View</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      // simple page controls (if more than one page)
+      let pagHtml = '';
+      if(pages > 1){
+        pagHtml += '<div style="text-align:center;margin-top:20px;display:flex;gap:8px;justify-content:center;">';
+        for(let i=1;i<=pages;i++){
+          pagHtml += `<button class="${i===page? 'btn btn-primary':'btn btn-secondary'}" style="padding:6px 10px;border-radius:6px" onclick="goPage(${i})">${i}</button>`;
+        }
+        pagHtml += '</div>';
+      }
+      grid.insertAdjacentHTML('afterend', pagHtml);
+    }
+
+    function goPage(n){ page = n; // remove old pagination block before re-render
+      const next = document.querySelectorAll('#packageGrid + div')[0];
+      if(next) next.remove();
+      renderPackages();
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    // events
+    searchInput.addEventListener('input', ()=>{ page=1; // remove old pagination block
+      const next = document.querySelectorAll('#packageGrid + div')[0]; if(next) next.remove(); renderPackages(); });
+    sortSelect.addEventListener('change', ()=>{ page=1; const next = document.querySelectorAll('#packageGrid + div')[0]; if(next) next.remove(); renderPackages(); });
+    chips.forEach(c => c.addEventListener('click', e=>{
+      const f = e.currentTarget.dataset.filter;
+      if(filterType === f){ filterType = null; c.classList.remove('active'); }
+      else { filterType = f; chips.forEach(x=>x.classList.remove('active')); c.classList.add('active'); }
+      page = 1;
+      const next = document.querySelectorAll('#packageGrid + div')[0]; if(next) next.remove(); renderPackages();
+    }));
+
+    function viewDetails(id){
+      const p = packages.find(x=>x.id===id);
+      if(!p) return alert('Package not found');
+      alert(`${p.title}\n\nPrice: ${formatPrice(p.price)}\nDuration: ${p.duration} days\n\n${p.desc}`);
+    }
+
+    // initial render
+    renderPackages();
+  </script>
+
+</body>
+</html>

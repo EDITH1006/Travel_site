@@ -1,0 +1,113 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | ROAMIGO</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: var(--ff-poppins);
+      background: linear-gradient(135deg, var(--united-nations-blue), var(--bright-navy-blue));
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .login-container {
+      background: var(--white);
+      width: 380px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      padding: 40px 30px;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-container h2 {
+      color: var(--gunmetal);
+      margin-bottom: 20px;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      background: var(--united-nations-blue);
+      color: var(--white);
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-container button:hover {
+      background: var(--bright-navy-blue);
+    }
+
+    .login-links {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .login-links a {
+      color: var(--united-nations-blue);
+      text-decoration: none;
+    }
+
+    .login-links a:hover {
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Welcome Back to ROAMIGO</h2>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email address" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <div class="login-links">
+  <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+   
+</div>
+  </div>
+
+  <script>
+    // Simple fake login for demonstration
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      
+      if (email && pass) {
+        // you can add backend auth later
+        localStorage.setItem("roamigoUser", email);
+        window.location.href = "user-dashboard.html"; // redirect
+      } else {
+        alert("Please enter both email and password!");
+      }
+    });
+  </script>
+
+</body>
+</html>

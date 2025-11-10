@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | ROAMIGO</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: var(--ff-poppins);
+      background: linear-gradient(135deg, var(--bright-navy-blue), var(--united-nations-blue));
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .signup-container {
+      background: var(--white);
+      width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      padding: 40px 30px;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .signup-container h2 {
+      color: var(--gunmetal);
+      margin-bottom: 20px;
+    }
+
+    .signup-container input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .signup-container button {
+      width: 100%;
+      padding: 12px;
+      background: var(--united-nations-blue);
+      color: var(--white);
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .signup-container button:hover {
+      background: var(--bright-navy-blue);
+    }
+
+    .signup-links {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .signup-links a {
+      color: var(--united-nations-blue);
+      text-decoration: none;
+    }
+
+    .signup-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-container">
+    <h2>Create Your ROAMIGO Account</h2>
+    <form id="signupForm">
+      <input type="text" id="fullname" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email Address" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+    <div class="signup-links">
+      <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const fullname = document.getElementById("fullname").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      const confirm = document.getElementById("confirmPassword").value.trim();
+
+      if (!fullname || !email || !pass || !confirm) {
+        alert("Please fill in all fields!");
+        return;
+      }
+
+      if (pass !== confirm) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      // Save signup data locally (simulate registration)
+      localStorage.setItem("roamigoUser", email);
+      localStorage.setItem("roamigoName", fullname);
+
+      alert("Account created successfully!");
+      window.location.href = "user-dashboard.html";
+    });
+  </script>
+
+</body>
+</html>
